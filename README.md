@@ -183,7 +183,7 @@ The **bipolar regression** framework decomposes prediction error into:
 ### 1. Clone the repository
 
 ```bash
-git clone <lab-repo-url>
+git clone https://github.com/ARLabXiang/CAMP-Plant
 cd CAMP-Plant
 ```
 
