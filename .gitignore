@@ -108,6 +108,6 @@ output/
 workspace/
 results/
 figs/
-figures/
+# figures/
 examples/
 tools/exp_bash/
