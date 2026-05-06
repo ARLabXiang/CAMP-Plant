@@ -144,13 +144,13 @@ Full scoreboard in [`work_dirs/combined_scoreboard_ep150.csv`](work_dirs/combine
 Each grid shows **10 future frames** predicted by all 10 methods vs. ground truth.
 
 <p align="center">
-  <img src="figures/komatsuna_ep150/fig4_qualitative_komatsuna.png" width="80%" alt="Komatsuna qualitative"/>
+  <img src="figures/komatsuna_ep150/fig4_qualitative_komatsuna.png" width="100%" alt="Komatsuna qualitative"/>
   <br><em>Figure 3a. Qualitative predictions — Komatsuna. TAU and SimVP produce the sharpest textures;
   ConvLSTM and PredRNN blur progressively over longer horizons.</em>
 </p>
 
 <p align="center">
-  <img src="figures/arabidopsis_ep150/fig4_qualitative_arabidopsis.png" width="80%" alt="Arabidopsis qualitative"/>
+  <img src="figures/arabidopsis_ep150/fig4_qualitative_arabidopsis.png" width="100%" alt="Arabidopsis qualitative"/>
   <br><em>Figure 3b. Qualitative predictions — Arabidopsis. Methods show tighter spread; rosette
   morphology (symmetric leaf arrangement) is generally well-captured.</em>
 </p>
