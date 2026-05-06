@@ -1,0 +1,16 @@
+einops
+fvcore
+future
+lpips
+matplotlib
+numpy
+opencv-python-headless
+packaging
+pandas
+scikit-image
+scikit-learn
+six
+timm==0.9.12
+tqdm
+lightning>=2.0.0
+PyWavelets

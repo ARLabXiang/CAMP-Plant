@@ -1,0 +1,34 @@
+# requirements/plant.txt
+# -----------------------------------------------------------------------
+# Exact dependencies verified for CAMP plant-growth experiments.
+# Install with:  pip install -r requirements/plant.txt
+# -----------------------------------------------------------------------
+
+# Deep learning core
+torch>=2.0.0
+torchvision>=0.15.0
+lightning>=2.0.0
+pytorch-lightning>=2.0.0
+
+# Model utilities
+timm==0.9.12        # must be 0.9.x — newer versions removed timm.optim.Nadam
+einops>=0.6.0
+
+# Scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+scikit-image>=0.20.0
+pandas>=1.5.0
+
+# Image processing
+Pillow>=9.0.0
+opencv-python-headless>=4.7.0
+matplotlib>=3.6.0
+
+# Data and evaluation
+h5py>=3.8.0
+lpips>=0.1.4
+
+# Misc
+packaging>=23.0
+PyWavelets>=1.4.0
