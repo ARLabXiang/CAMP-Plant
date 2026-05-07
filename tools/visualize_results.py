@@ -558,20 +558,17 @@ def figure_qualitative(
                     spine.set_edgecolor("red")
                     spine.set_linewidth(1.5)
 
-        # Row label on the left
-        # Attach to the first cell's position
-        ax0 = fig.add_subplot(gs[row_idx, 0])
-        ax0.set_ylabel(
-            label,
+        # Row label on the left — drawn as figure-level text so it survives
+        # the axis-off styling we use elsewhere in the grid.
+        row_y = 1.0 - (row_idx + 0.5) / n_rows
+        row_y = 0.01 + (0.93 - 0.01) * row_y  # map into gs top/bottom band
+        fig.text(
+            0.085, row_y, label,
+            ha="right", va="center",
             fontsize=12,
-            labelpad=4,
-            rotation=0,
-            ha="right",
-            va="center",
             fontweight="bold" if is_camp else "normal",
             color="red" if is_camp else "black",
         )
-        ax0.axis("off")
 
     # Vertical separator between RGB and ExGI halves
     # Draw as a figure-level line
