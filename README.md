@@ -348,7 +348,7 @@ The CAMP method family adds biology-grounded auxiliary supervision (ExGI regress
   author       = {Zhou, Anni and Wang, Kun and Liu, Yuchen and Xu, Dongkuan (DK) and Xiang, Lirong},
   title        = {CAMP-Plant: Classification-Assisted Multi-task Plant Growth Prediction},
   year         = {2026},
-  note         = {Software repository (paper in preparation)}
+  note         = {Software repository (paper in revision)}
 }
 ```
 
