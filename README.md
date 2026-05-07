@@ -1,6 +1,6 @@
 # CAMP-Plant 🌱
 
-### Classification-Assisted Multi-task Plant Growth Prediction
+### Classification-Assisted Multi-task Plant (CAMP) Growth Prediction
 
 <p align="left">
 <a href="LICENSE">
