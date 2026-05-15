@@ -499,33 +499,37 @@ def figure_qualitative(
     n_cols = n_frames * 2
     n_rows = len(rows)
 
-    fig = plt.figure(figsize=(n_cols * 1.6, n_rows * 1.8))
+    # v11: figsize bumped so internal text is readable at print width.
+    # Left margin widened from 0.09 to 0.14 to accommodate larger row labels.
+    fig = plt.figure(figsize=(n_cols * 1.9, n_rows * 2.1))
     fig.suptitle(
         f"Qualitative Predictions — {dataset.capitalize()}  (sample {sample_idx})",
-        fontweight="bold", y=1.00,
+        fontweight="bold", y=1.00, fontsize=22,
     )
 
     gs = gridspec.GridSpec(
         n_rows, n_cols,
         figure=fig,
         hspace=0.05, wspace=0.02,
-        left=0.09, right=0.99, top=0.93, bottom=0.01,
+        left=0.14, right=0.99, top=0.93, bottom=0.01,
     )
 
     # Column header annotations (done once at the top)
-    header_ax = fig.add_axes([0.09, 0.94, 0.90, 0.025])
+    header_ax = fig.add_axes([0.14, 0.94, 0.85, 0.025])
     header_ax.axis("off")
     half = 0.5 / n_cols
     for i in range(n_frames):
         header_ax.text(
             (i + 0.5) / n_cols, 0.5,
             f"Frame {i + 1}",
-            ha="center", va="center", fontsize=11, color="#333333",
+            ha="center", va="center", fontsize=18, color="#333333",
+            fontweight="bold",
         )
         header_ax.text(
             (n_frames + i + 0.5) / n_cols, 0.5,
             f"ExGI {i + 1}",
-            ha="center", va="center", fontsize=11, color="#007700",
+            ha="center", va="center", fontsize=18, color="#007700",
+            fontweight="bold",
         )
     # Vertical separator line between RGB and ExGI halves
     header_ax.axvline(0.5, color="gray", linewidth=0.8, linestyle="--")
@@ -563,16 +567,16 @@ def figure_qualitative(
         row_y = 1.0 - (row_idx + 0.5) / n_rows
         row_y = 0.01 + (0.93 - 0.01) * row_y  # map into gs top/bottom band
         fig.text(
-            0.085, row_y, label,
+            0.135, row_y, label,
             ha="right", va="center",
-            fontsize=12,
-            fontweight="bold" if is_camp else "normal",
+            fontsize=20,
+            fontweight="bold" if is_camp else "bold",
             color="red" if is_camp else "black",
         )
 
     # Vertical separator between RGB and ExGI halves
     # Draw as a figure-level line
-    left_frac  = 0.09
+    left_frac  = 0.14
     right_frac = 0.99
     total_width = right_frac - left_frac
     sep_x = left_frac + total_width * 0.5
@@ -585,9 +589,11 @@ def figure_qualitative(
 
     # Section labels
     fig.text(left_frac + total_width * 0.25, 0.97,
-             "RGB Predictions", ha="center", fontsize=13, color="#222222")
+             "RGB Predictions", ha="center", fontsize=22, fontweight="bold",
+             color="#222222")
     fig.text(left_frac + total_width * 0.75, 0.97,
-             "ExGI Maps", ha="center", fontsize=13, color="#007700")
+             "ExGI Maps", ha="center", fontsize=22, fontweight="bold",
+             color="#007700")
 
     fname = f"fig4_qualitative_{dataset}.pdf"
     _save_fig(fig, out_dir, fname, dpi)
@@ -666,10 +672,11 @@ def figure_poi_curves(
     # ---------------------------------------------------------------
     # Plot
     # ---------------------------------------------------------------
-    fig, axes = plt.subplots(1, 3, figsize=(16, 5))
+    # v11: figsize widened and per-axes font scaling bumped for print legibility.
+    fig, axes = plt.subplots(1, 3, figsize=(20, 6.5))
     fig.suptitle(
         f"POI-based Bipolar Regression Curves — {dataset.capitalize()}",
-        fontweight="bold",
+        fontweight="bold", fontsize=22,
     )
 
     panel_keys = [
@@ -711,9 +718,10 @@ def figure_poi_curves(
                 color=color, alpha=0.12, zorder=2,
             )
 
-        ax.set_title(title)
-        ax.set_xlabel("Frame index")
-        ax.set_ylabel(ylabel)
+        ax.set_title(title, fontsize=18, fontweight="bold")
+        ax.set_xlabel("Frame index", fontsize=16)
+        ax.set_ylabel(ylabel, fontsize=16)
+        ax.tick_params(axis="both", labelsize=14)
         ax.grid(True, alpha=0.3, linestyle="--")
 
     # Shared legend below all panels
@@ -730,7 +738,8 @@ def figure_poi_curves(
         loc="lower center",
         ncol=min(len(labels), 5),
         frameon=True,
-        bbox_to_anchor=(0.5, -0.08),
+        bbox_to_anchor=(0.5, -0.06),
+        fontsize=14,
     )
 
     plt.tight_layout(rect=[0, 0.08, 1, 1])
