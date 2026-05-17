@@ -128,9 +128,15 @@ def main():
         ax.set_yticklabels([METHOD_DISPLAY.get(r["method"], r["method"])
                            for r in metric_rows])
         ax.invert_yaxis()
-        ax.set_xlabel(metric.upper())
-        ax.set_title(f"{metric.upper()} — bootstrap 95% CI "
-                     f"({args.dataset}, {args.epoch} ep, B={args.n_bootstrap})")
+        # Display-friendly names
+        metric_display = {
+            "mae": "MAE", "mse": "MSE", "ssim": "SSIM",
+            "psnr": "PSNR", "poi_mae": "POI-MAE",
+        }.get(metric, metric.upper())
+        dataset_display = args.dataset.capitalize()
+        ax.set_xlabel(metric_display)
+        ax.set_title(f"{metric_display} on {dataset_display} "
+                     f"(95% confidence intervals)")
         ax.grid(axis="x", alpha=0.3)
         fig.tight_layout()
         png = osp.join(out_dir, f"bootstrap_ci_{metric}.png")
