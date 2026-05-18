@@ -61,7 +61,10 @@ def plot_sample(sample_idx, preds_a, preds_b, trues,
                 name_a, name_b, metric, delta, out_path, tau=0.1):
     """Render a grid: rows = {GT, A, B}, cols = T frames (RGB + ExGI)."""
     T = preds_a.shape[0]
-    fig, axes = plt.subplots(3, 2 * T, figsize=(2.2 * T, 6.6))
+    # Figure height was 6.6"; the 3 row-by-1" plot grid couldn't fill it, so
+    # matplotlib bled the slack into top/bottom margins. Drop it to ~3.8" so
+    # the plot rows actually fill the figure and the title can sit close.
+    fig, axes = plt.subplots(3, 2 * T, figsize=(2.2 * T, 3.8))
     matplotlib.rcParams.update({"font.family": "serif",
                                 "font.serif": ["Times New Roman", "DejaVu Serif"]})
 
@@ -74,9 +77,9 @@ def plot_sample(sample_idx, preds_a, preds_b, trues,
             ax.set_xticks([])
             ax.set_yticks([])
             if t == 0:
-                ax.set_ylabel(label, fontsize=10)
+                ax.set_ylabel(label, fontsize=11)
             if row_idx == 0:
-                ax.set_title(f"t = {t + 1}", fontsize=9)
+                ax.set_title(f"t = {t + 1}", fontsize=10, pad=2)
 
             # ExGI
             ax = axes[row_idx, 2 * t + 1]
@@ -89,10 +92,14 @@ def plot_sample(sample_idx, preds_a, preds_b, trues,
     show_row(1, preds_a, METHOD_DISPLAY.get(name_a, name_a))
     show_row(2, preds_b, METHOD_DISPLAY.get(name_b, name_b))
 
+    # Pack rows tightly; reserve room above for column labels AND the title.
+    # Layout from top: title at y=0.985 → t=1..t=5 column labels → plot rows.
+    fig.subplots_adjust(left=0.04, right=0.995,
+                        top=0.83, bottom=0.02,
+                        wspace=0.05, hspace=0.05)
     fig.suptitle(f"Sample {sample_idx}  |  Δ{metric} "
                  f"({name_a} − {name_b}) = {delta:.3f}",
-                 fontsize=11)
-    fig.tight_layout(rect=[0, 0, 1, 0.96])
+                 fontsize=20, fontweight="bold", y=0.985)
     fig.savefig(out_path, dpi=150)
     plt.close(fig)
 
